@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>김규빈 | Portfolio</title>
+  <style>
+    :root {
+      --bg: #090b10;
+      --panel: #141827;
+      --panel-soft: #1b2133;
+      --line: rgba(116, 230, 255, 0.32);
+      --text: #f4f7fb;
+      --muted: #b6c2d1;
+      --accent: #12d7ff;
+      --accent-2: #79f2c0;
+      --warning: #ffd166;
+      --shadow: 0 22px 70px rgba(0, 0, 0, 0.36);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Pretendard", "Noto Sans KR", "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 18% 12%, rgba(18, 215, 255, 0.18), transparent 28%),
+        radial-gradient(circle at 82% 22%, rgba(121, 242, 192, 0.12), transparent 26%),
+        linear-gradient(180deg, #080a0f 0%, #111522 48%, #080a0f 100%);
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(9, 11, 16, 0.82);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav-inner {
+      width: min(1120px, calc(100% - 40px));
+      height: 64px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .hero {
+      width: min(1120px, calc(100% - 40px));
+      min-height: calc(100vh - 64px);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      align-items: center;
+      gap: 56px;
+      padding: 64px 0 80px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent-2);
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 2px;
+      background: var(--accent-2);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(46px, 8vw, 92px);
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .hero h1 strong {
+      display: block;
+      color: var(--accent);
+    }
+
+    .lead {
+      margin: 26px 0 0;
+      max-width: 640px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .button.primary {
+      background: linear-gradient(135deg, var(--accent), #4ee8a7);
+      color: #031016;
+      border-color: transparent;
+    }
+
+    .profile-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      padding: 26px;
+      background: linear-gradient(145deg, rgba(27, 33, 51, 0.96), rgba(12, 16, 27, 0.96));
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .profile-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(18, 215, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18, 215, 255, 0.08) 1px, transparent 1px);
+      background-size: 34px 34px;
+      mask-image: linear-gradient(to bottom, black, transparent);
+      pointer-events: none;
+    }
+
+    .photo-wrap {
+      position: relative;
+      display: grid;
+      place-items: center;
+      width: min(100%, 320px);
+      aspect-ratio: 4 / 5;
+      margin: 0 auto 24px;
+      border-radius: 8px;
+      background: #101624;
+      overflow: hidden;
+      border: 1px solid rgba(18, 215, 255, 0.4);
+    }
+
+    .photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .profile-card h2 {
+      position: relative;
+      margin: 0;
+      font-size: 28px;
+    }
+
+    .profile-card p {
+      position: relative;
+      margin: 10px 0 0;
+      color: var(--muted);
+    }
+
+    .quick-info {
+      position: relative;
+      display: grid;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .quick-info div {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--muted);
+    }
+
+    .quick-info b {
+      color: var(--text);
+    }
+
+    main {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding-bottom: 80px;
+    }
+
+    section {
+      padding: 72px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 42px);
+      color: var(--accent);
+    }
+
+    .section-head p {
+      max-width: 540px;
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      border-radius: 8px;
+      padding: 24px;
+      background: rgba(20, 24, 39, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.24);
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      color: var(--text);
+      font-size: 21px;
+    }
+
+    .card .meta {
+      color: var(--accent-2);
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .card p,
+    .card li {
+      color: var(--muted);
+    }
+
+    ul {
+      margin: 12px 0 0;
+      padding-left: 20px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 20px;
+      padding: 20px;
+      border-radius: 8px;
+      background: rgba(20, 24, 39, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .timeline-item time {
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .timeline-item h3 {
+      margin: 0 0 6px;
+      font-size: 20px;
+    }
+
+    .timeline-item p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .tag {
+      padding: 7px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--accent);
+      background: rgba(18, 215, 255, 0.06);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .feature {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .result-card {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg, rgba(18, 215, 255, 0.13), rgba(121, 242, 192, 0.08));
+    }
+
+    .footer {
+      padding: 40px 0 64px;
+      text-align: center;
+      color: var(--muted);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    @media (max-width: 840px) {
+      .nav-inner {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        width: min(100% - 28px, 1120px);
+        min-height: auto;
+        grid-template-columns: 1fr;
+        gap: 34px;
+        padding: 48px 0 64px;
+      }
+
+      main {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .section-head p {
+        margin-top: 10px;
+      }
+
+      .grid,
+      .feature {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .photo-wrap {
+        width: min(100%, 260px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#top">KIM <span>GYUBIN</span></a>
+      <div class="nav-links" aria-label="페이지 섹션 이동">
+        <a href="#about">소개</a>
+        <a href="#project">프로젝트</a>
+        <a href="#career">경험</a>
+        <a href="#assessment">진로검사</a>
+        <a href="#activities">활동</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div>
+      <div class="eyebrow">Computer Software Portfolio</div>
+      <h1>김규빈<strong>PORTFOLIO</strong></h1>
+      <p class="lead">
+        사용자 중심의 화면 설계와 웹 서비스 구현에 관심이 있는 컴퓨터소프트웨어학과 학생입니다.
+        팀 프로젝트와 현장 경험을 바탕으로 문제를 구조화하고, 꾸준히 개선하는 개발자를 목표로 합니다.
+      </p>
+      <div class="hero-actions">
+        <a class="button primary" href="#about">포트폴리오 보기</a>
+        <a class="button" href="#project">프로젝트 보기</a>
+      </div>
+    </div>
+
+    <aside class="profile-card" aria-label="김규빈 프로필 요약">
+      <div class="photo-wrap">
+        <img src="it-visual.png" alt="코드와 회로를 표현한 IT 포트폴리오 이미지" />
+      </div>
+      <h2>김규빈</h2>
+      <p>컴퓨터소프트웨어학과 20260760</p>
+      <div class="quick-info">
+        <div><span>관심 분야</span><b>프론트엔드 · 웹 서비스</b></div>
+        <div><span>성향</span><b>ENTJ</b></div>
+        <div><span>진로 코드</span><b>Holland CS</b></div>
+      </div>
+    </aside>
+  </header>
+
+  <main>
+    <section id="about">
+      <div class="section-head">
+        <h2>About Me</h2>
+        <p>사용자가 이해하기 쉬운 화면과 안정적인 서비스 흐름을 만드는 데 관심이 있습니다.</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <h3>자기소개</h3>
+          <p>
+            웹 개발과 IT 서비스 기획에 관심이 있으며, 반려동물 관련 웹사이트 팀 프로젝트를 경험했습니다.
+            화면 구성, 사용자 흐름, 기능 정리를 함께 고민하며 실제 사용자가 편하게 쓸 수 있는 서비스를 만드는 것을 중요하게 생각합니다.
+          </p>
+          <div class="tags">
+            <span class="tag">HTML/CSS</span>
+            <span class="tag">웹 UI 구성</span>
+            <span class="tag">팀 프로젝트</span>
+          </div>
+        </article>
+        <article class="card">
+          <h3>개발자로서의 강점</h3>
+          <ul>
+            <li>요구사항을 차분히 정리하고 필요한 기능을 구조화합니다.</li>
+            <li>사용자 입장에서 화면 흐름과 가독성을 고민합니다.</li>
+            <li>팀원과 소통하며 역할을 나누고 결과물을 완성합니다.</li>
+            <li>반복 확인과 꼼꼼한 검토로 오류를 줄이는 편입니다.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="project">
+      <div class="section-head">
+        <h2>IT Project</h2>
+        <p>학업과 팀 활동을 통해 웹 서비스의 구조, 화면 구성, 사용자 경험을 직접 고민했습니다.</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <h3>반려동물 관련 웹사이트</h3>
+          <div class="meta">팀 프로젝트 · 웹 서비스 기획 및 화면 구성</div>
+          <p>
+            반려동물 정보를 쉽고 편하게 확인할 수 있는 웹사이트를 목표로 프로젝트를 진행했습니다.
+            사용자가 원하는 정보를 빠르게 찾을 수 있도록 메뉴 구조와 화면 흐름을 정리했습니다.
+          </p>
+          <div class="tags">
+            <span class="tag">서비스 기획</span>
+            <span class="tag">화면 설계</span>
+            <span class="tag">웹 구현</span>
+          </div>
+        </article>
+        <article class="card">
+          <h3>포트폴리오 웹페이지</h3>
+          <div class="meta">GitHub Pages 배포용 개인 웹페이지</div>
+          <p>
+            자기소개, 진로검사, 프로젝트, 자격증 정보를 한 페이지에서 확인할 수 있도록 구성했습니다.
+            공개 웹페이지 특성을 고려해 개인정보 노출을 줄이고 IT 주제에 맞는 시각 자료를 사용했습니다.
+          </p>
+          <div class="tags">
+            <span class="tag">GitHub Pages</span>
+            <span class="tag">반응형 웹</span>
+            <span class="tag">개인 브랜딩</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="career">
+      <div class="section-head">
+        <h2>Experience</h2>
+        <p>현장 경험을 IT 직무에서 필요한 책임감, 데이터 처리, 협업 태도와 연결해 성장하고 있습니다.</p>
+      </div>
+      <div class="timeline">
+        <article class="timeline-item">
+          <time>2020 - 2022</time>
+          <div>
+            <h3>엠폴시스템 / 회사 사원</h3>
+            <p>CAD 도면 작업과 IoT 데이터 수집 업무를 수행하며 기술 기반 업무 프로세스와 데이터 관리의 중요성을 경험했습니다.</p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <time>2021 - 2022</time>
+          <div>
+            <h3>피기피기 고깃집</h3>
+            <p>재고 관리와 계산 업무를 통해 정확한 기록, 반복 업무 처리, 고객 응대 경험을 쌓았습니다.</p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <time>2022 - 2023</time>
+          <div>
+            <h3>늘상식당</h3>
+            <p>정해진 절차를 안정적으로 수행하며 문제 상황을 빠르게 파악하고 대응했습니다.</p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <time>2025 - 2026</time>
+          <div>
+            <h3>샤브샤브집</h3>
+            <p>매장 운영 보조와 재고 확인을 담당하며 협업과 일정한 품질 유지의 중요성을 배웠습니다.</p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <time>2025.09 - 현재</time>
+          <div>
+            <h3>마라탕 매장</h3>
+            <p>현재도 재고 관리와 매장 정리 업무를 수행하며 책임감 있는 업무 습관을 이어가고 있습니다.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="assessment">
+      <div class="section-head">
+        <h2>Career Assessment</h2>
+        <p>진로심리검사 결과를 바탕으로 체계적인 업무 처리와 리더십을 IT 분야로 연결하고자 합니다.</p>
+      </div>
+      <div class="feature">
+        <article class="card">
+          <h3>Holland 직업적성검사</h3>
+          <div class="meta">검사일 2026.03.25 · 동양미래대학교 학생상담센터</div>
+          <ul>
+            <li>진로 코드: CS, 관습형·사회형</li>
+            <li>백분위: C 64%, S 72%, R 보조 코드</li>
+            <li>IT 연결 분야: 웹 서비스 운영, 홈페이지 관리, 데이터 정리, 서비스 지원</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>MBTI: ENTJ</h3>
+          <div class="meta">대담한 통솔자</div>
+          <ul>
+            <li>리더십과 전략적 사고가 강합니다.</li>
+            <li>목표 지향적이며 효율을 중시합니다.</li>
+            <li>빠른 의사결정과 추진력을 바탕으로 도전합니다.</li>
+          </ul>
+        </article>
+        <article class="card result-card">
+          <h3>결과 요약</h3>
+          <p>
+            Holland CS 코드와 ENTJ 성향은 체계적인 사고, 책임감, 리더십을 함께 보여줍니다.
+            이를 바탕으로 웹 서비스 기획과 구현을 연결하고, 안정적으로 운영할 수 있는 IT 인재로 성장하는 것이 적합합니다.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="section-head">
+        <h2>Tech Direction</h2>
+        <p>웹 개발 기초를 중심으로 화면 구현, 서비스 구조 이해, 협업 역량을 확장하고 있습니다.</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <h3>관심 기술</h3>
+          <ul>
+            <li>HTML/CSS 기반 웹페이지 제작</li>
+            <li>사용자 중심 UI 구성</li>
+            <li>GitHub Pages를 활용한 웹 배포</li>
+            <li>데이터를 정리하고 화면에 표현하는 서비스</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>학습 방향</h3>
+          <ul>
+            <li>JavaScript를 활용한 동적인 웹 기능 구현</li>
+            <li>프론트엔드 구조와 반응형 레이아웃 이해</li>
+            <li>팀 프로젝트에서 역할 분담과 일정 관리</li>
+            <li>서비스 기획부터 배포까지의 전체 흐름 경험</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="activities">
+      <div class="section-head">
+        <h2>Activities & Licenses</h2>
+        <p>현재 참여 중인 활동과 보유 자격을 정리했습니다. 예정 항목은 추후 실제 참여 후 업데이트할 수 있습니다.</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <h3>대회 참가</h3>
+          <ul>
+            <li>2026년 태일씨엔티 공모전</li>
+            <li>2026년 관광데이터 공모전 참가 중</li>
+            <li>2027년 해커톤 참가 예정</li>
+            <li>2027년 프로그래밍 대회 참가 예정</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>자격증</h3>
+          <ul>
+            <li>전자기기기능사, 2021년 취득</li>
+            <li>2종 보통 운전면허, 2022년 취득</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 Kim Gyubin. Computer Software Portfolio.</p>
+  </footer>
+</body>
+</html>
